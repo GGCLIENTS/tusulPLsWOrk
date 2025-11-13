@@ -1,0 +1,78 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: cover, url(./images/BakgroundPicture.jpg);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./images/BakgroundPicture.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  filter: blur(15px);
+  z-index: -1;
+  animation: fadeInBackground 1s ease-out, subtleMove 20s ease-in-out infinite;
+}
+
+.register-form {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  animation: slideInFromBottom 0.8s ease-out;
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.register-input {
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+}
+
+.register-submit-btn {
+  padding: 10px;
+  margin-top: 10px;
+  background: #4c51bf;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register-back-btn {
+  margin-top: 10px;
+  padding: 10px;
+  background: #90cdf4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register-message {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+}

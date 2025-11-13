@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
+import "./register.css";
+import backgroundImage from './images/BakgroundPicture.jpg';
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -16,7 +23,7 @@ function Register() {
     try {
       const user = await createUserWithEmailAndPassword(auth, email.trim(), password);
       console.log("Registered:", user);
-      setMessage("Success! You can now log in.");
+      setMessage("Амжилттай бүртгүүллээ.");
     } catch (err) {
       console.error("Error:", err.code, err.message);
       setMessage(`Error: ${err.message}`);
@@ -24,37 +31,21 @@ function Register() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background: "linear-gradient(135deg, #667eea, #764ba2)",
-        color: "#fff",
-      }}
-    >
+    <div className="register-container">
+      <div className="register-background"></div>
+      <div className="particles"></div>
       <form
         onSubmit={handleRegister}
-        style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          padding: "2rem",
-          width: "320px",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-        }}
+        className={`register-form ${animate ? "slideInFromBottom" : ""}`}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>Бүртгүүлэх</h2>
+        <h2 className="register-title">Бүртгүүлэх</h2>
 
         <input
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           required
-          style={{ padding: "10px", margin: "8px 0", border: "none", borderRadius: "6px" }}
+          className="register-input"
         />
 
         <input
@@ -62,44 +53,25 @@ function Register() {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{ padding: "10px", margin: "8px 0", border: "none", borderRadius: "6px" }}
+          className="register-input"
         />
 
         <button
           type="submit"
-          style={{
-            padding: "10px",
-            marginTop: "10px",
-            background: "#4c51bf",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            transition: "0.2s",
-          }}
+          className="register-submit-btn"
         >
           Бүртгүүлэх
         </button>
 
-        {/* Return to Home button */}
         <button
           type="button"
           onClick={() => navigate("/")}
-          style={{
-            marginTop: "10px",
-            padding: "10px",
-            background: "#90cdf4",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            transition: "0.2s",
-          }}
+          className="register-back-btn"
         >
           Буцах
         </button>
 
-        <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.85rem" }}>
+        <p className="register-message">
           {message}
         </p>
       </form>

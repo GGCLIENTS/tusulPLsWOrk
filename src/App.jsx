@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Login from "./login";
 import Register from "./register";
 import Home from "./home";
+import "./home.css";
 
 function TeacherPage() {
   const navigate = useNavigate();
@@ -14,13 +15,16 @@ function TeacherPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(135deg, #f6d365, #fda085)",
+        background: "#000",
         color: "#fff",
         fontFamily: "Arial, sans-serif",
         textAlign: "center",
         padding: "20px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <div className="particles"></div>
       <h1
         style={{
           fontSize: "3rem",
@@ -67,13 +71,16 @@ function StudentPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(135deg, #667eea, #764ba2)",
+        background: "#000",
         color: "#fff",
         fontFamily: "Arial, sans-serif",
         textAlign: "center",
         padding: "20px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <div className="particles"></div>
       <h1
         style={{
           fontSize: "3rem",

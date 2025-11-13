@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase.js";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
+import backgroundImage from './images/BakgroundPicture.jpg';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,30 +49,14 @@ function Login() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background: "linear-gradient(135deg, #667eea, #764ba2)",
-        color: "#fff",
-      }}
-    >
+    <div className="login-container">
+      <div className="login-background"></div>
+      <div className="particles"></div>
       <form
         onSubmit={handleLogin}
-        style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          padding: "2rem",
-          width: "320px",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-        }}
+        className={`login-form ${animate ? "slideInFromBottom" : ""}`}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>нэвтэрх</h2>
+        <h2 className="login-title">нэвтэрх</h2>
 
         <input
           type="email"
@@ -73,7 +64,7 @@ function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          style={{ padding: "10px", margin: "8px 0", border: "none", borderRadius: "6px" }}
+          className="login-input"
         />
 
         <input
@@ -82,52 +73,29 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{ padding: "10px", margin: "8px 0", border: "none", borderRadius: "6px" }}
+          className="login-input"
         />
 
-        {error && (
-          <p style={{ color: "#ff6b6b", textAlign: "center", fontSize: "0.9rem" }}>
-            {error}
-          </p>
-        )}
+        {error && <p className="login-error">{error}</p>}
 
         <button
           type="submit"
           disabled={loading}
-          style={{
-            padding: "10px",
-            marginTop: "10px",
-            background: loading ? "#aaa" : "#4c51bf",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            cursor: loading ? "not-allowed" : "pointer",
-            transition: "0.2s",
-          }}
+          className="login-submit-btn"
         >
           {loading ? "Нэвтэрч байна..." : "Нэвтрэх"}
         </button>
 
-        {/* Return to Home button */}
         <button
           type="button"
           onClick={() => navigate("/")}
-          style={{
-            marginTop: "10px",
-            padding: "10px",
-            background: "#90cdf4",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            transition: "0.2s",
-          }}
+          className="login-back-btn"
         >
           Буцах
         </button>
 
-        <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.85rem" }}>
-          Шинэ хэрэглэгч? <a href="/register" style={{ color: "#90cdf4" }}>Бүртгүүлэх</a>
+        <p className="login-register-link">
+          Шинэ хэрэглэгч? <a href="/register">Бүртгүүлэх</a>
         </p>
       </form>
     </div>
